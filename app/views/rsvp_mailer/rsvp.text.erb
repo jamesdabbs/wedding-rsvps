@@ -1,0 +1,22 @@
+Dear <%= @rsvp.name %>,
+
+Thank you so much for your RSVP. <%= @message %>
+
+Here's a copy of the responses you provided:
+
+    <%= @rsvp.name %>: <%= @rsvp.attending %>
+    <% @rsvp.pluses.each do |plus| %>
+    <%= plus.name %>: <%= plus.attending %>
+    <% end %>
+
+    Dietary restrictions: <%= @rsvp.diet %>
+    Other comments: <%= @rsvp.comments %>
+
+If anything changes or questions come up, feel free to respond to this email, or reach out to us directly.
+
+Love,
+
+Rachel & James
+
+resullivan12@gmail.com
+james.dabbs@gmail.com
