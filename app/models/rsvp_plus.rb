@@ -5,4 +5,8 @@ class RsvpPlus < ApplicationRecord
 
   validates :name, presence: true
   validates :attending, presence: true
+
+  def attending?
+    attending == 'yes'
+  end
 end

@@ -6,10 +6,18 @@ class Rsvp < ApplicationRecord
   validates :attending, presence: true
 
   def any_attending?
-    attending == 'yes' || pluses.any? { |plus| plus.attending == 'yes' }
+    attending? || pluses.any?(&:attending?)
   end
 
   def deliver
     RsvpMailer.rsvp(self).deliver_now
+  end
+
+  def party
+    [self] + pluses
+  end
+
+  def attending?
+    attending == 'yes'
   end
 end

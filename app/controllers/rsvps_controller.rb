@@ -20,6 +20,18 @@ class RsvpsController < ApplicationController
     head :ok
   end
 
+  def index
+    unless params[:token] == ENV.fetch('CSV_TOKEN')
+      Rails.logger.info("Skipping RSVP index #{request.env['HTTP_ORIGIN']}")
+      head :not_found and return
+    end
+
+    send_data Rsvp::Summary.new(Rsvp.all).to_csv,
+      filename: Date.today.strftime("rsvps.%Y%m%d%H%M%S.csv")
+  end
+
+  private
+
   def rsvp_params
     params.
       require(:rsvp).
